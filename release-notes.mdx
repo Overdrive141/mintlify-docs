@@ -1,29 +1,34 @@
 ---
-title: "Release Notes & Changelog"
+title: "Release Notes"
 ---
 
 import { Callout, Accordion } from 'mintlify/components';
 
-# Release Notes & Changelog
+# Release Notes
 
 <Callout>
-**Latest Version:** v1.0 - Release Candidate (RC)
+Stay up to date with the latest updates and improvements in Foundation.
 </Callout>
 
-## What's New in v1.0 - Release Candidate (RC)?
+## v1.0 Release Candidate (RC)
 
 <Accordion title="Templates (Astro)">
-- Enhanced **Game (v1.0)** and **Studio (v0.1 Alpha)** templates for better performance and accessibility.
-- Improved support for **custom themes and styles**, allowing greater flexibility.
+- Added new templates: **Game (v1.0)** and **Studio (v0.1 Alpha)**.
+- Migrated to **Tailwind CSS v4**.
+- Introduced support for multiple templates on index pages.
+- Enabled integration of **shadcn** UI libraries with full support for custom styling via CSS.
 </Accordion>
 
 <Accordion title="Foundation Server">
-- Improved API **performance and scalability**.
-- Enhanced **queue management system**, reducing build times and improving stability.
-- Improved **error handling** for API failures.
+- Introduced new APIs: **Update Website Records**, **Get Queue Status**, and **Get Build Status**.
+- Enhanced the website build API to generate sites in both **production and development environments** (Production requires a custom domain managed by **CloudFlare**).
+- Optimized the build process by removing **long polling** after Jenkins job initiation.
+- **Automated status updates**: Jenkins now updates website status and domain name post-build.
+- Refactored website content refresh and generation APIs to use a **custom siteId** (replacing MongoDB's ObjectId).
+- Integrated **Umami** for analytics and tracking across all APIs.
+- Enhanced the **website retrieval API** to support **pagination and sorting** (used exclusively by templates during file generation).
 </Accordion>
 
 <Accordion title="Foundation Dashboard">
-- Dashboard UI refinements for **better user experience**.
-- Improved **analytics and reporting features**.
+- Currently under maintenance.
 </Accordion>
