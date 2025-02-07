@@ -69,6 +69,48 @@
         }
       }
     },
+    "/sites/trigger-build": {
+      "x-group-name": "Site API",
+      "post": {
+        "summary": "Trigger a site build",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Build triggered successfully"
+          }
+        }
+      }
+    },
+    "/sites/build/{buildId}": {
+      "x-group-name": "Site API",
+      "get": {
+        "summary": "Get build status",
+        "parameters": [
+          {
+            "name": "buildId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Build status retrieved successfully"
+          }
+        }
+      }
+    },
     "/config": {
       "x-group-name": "Config API",
       "get": {
@@ -121,15 +163,48 @@
         "type": "object",
         "properties": {
           "siteId": { "type": "string" },
-          "siteInfo": { "type": "object" },
-          "status": { "type": "string", "enum": ["pending", "completed"] }
+          "siteInfo": {
+            "type": "object",
+            "properties": {
+              "template": { "type": "string" },
+              "domain_name": { "type": "string" },
+              "cloudflare_project_name": { "type": "string" },
+              "locale": { "type": "string" },
+              "title": { "type": "string" },
+              "elevator_pitch": { "type": "string" },
+              "description": { "type": "string" }
+            }
+          },
+          "configId": { "type": "string" },
+          "data": { "type": "array" },
+          "status": { "type": "string", "enum": ["pending", "completed"] },
+          "production": { "type": "boolean" },
+          "createdBy": { "type": "string" }
         }
       },
       "Config": {
         "type": "object",
         "properties": {
           "configId": { "type": "string" },
-          "settings": { "type": "object" }
+          "site_info": {
+            "type": "object",
+            "properties": {
+              "keywords": { "type": "array", "items": { "type": "string" } },
+              "long_tailed_keywords": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            }
+          },
+          "audience": {
+            "type": "object",
+            "properties": {
+              "geo": { "type": "array", "items": { "type": "string" } },
+              "locale": { "type": "string" },
+              "age_range": { "type": "string" },
+              "gender": { "type": "array", "items": { "type": "string" } }
+            }
+          }
         }
       }
     }
