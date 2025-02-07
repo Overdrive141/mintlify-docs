@@ -16,7 +16,7 @@
     }
   ],
   "paths": {
-    "/sites": {
+    "/site": {
       "x-group-name": "Site API",
       "get": {
         "summary": "Retrieve all sites",
@@ -43,7 +43,7 @@
         }
       }
     },
-    "/sites/{siteId}": {
+    "/site/{siteId}": {
       "x-group-name": "Site API",
       "put": {
         "summary": "Update a site",
@@ -69,7 +69,7 @@
         }
       }
     },
-    "/sites/trigger-build": {
+    "/site/trigger-build": {
       "x-group-name": "Site API",
       "post": {
         "summary": "Trigger a site build",
@@ -85,7 +85,7 @@
         }
       }
     },
-    "/sites/build/{buildId}": {
+    "/site/build/{buildId}": {
       "x-group-name": "Site API",
       "get": {
         "summary": "Get build status",
