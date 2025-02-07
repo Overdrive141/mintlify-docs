@@ -29,7 +29,7 @@
           {
             "group": "Endpoints",
             "pages": [
-              "api-reference/openapi-spec"
+              "api-reference/openapi.json"
             ]
           }
         ]
