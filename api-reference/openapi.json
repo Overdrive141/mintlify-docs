@@ -1,16 +1,13 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "OpenAPI Plant Store",
-    "description": "A sample API that uses a plant store as an example to demonstrate features in the OpenAPI specification",
-    "license": {
-      "name": "MIT"
-    },
+    "title": "Foundation API",
+    "description": "API documentation for Foundation's site and config management.",
     "version": "1.0.0"
   },
   "servers": [
     {
-      "url": "http://sandbox.mintlify.com"
+      "url": "http://sandbox.mintlify.com/api/v1"
     }
   ],
   "security": [
@@ -19,40 +16,115 @@
     }
   ],
   "paths": {
-    "/plants": {
+    "/sites": {
       "get": {
-        "description": "Returns all plants from the system that the user has access to",
-        "parameters": [
+        "summary": "Retrieve all sites",
+        "description": "Returns all sites that the user has access to.",
+        "security": [
           {
-            "name": "limit",
-            "in": "query",
-            "description": "The maximum number of results to return",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
+            "bearerAuth": []
           }
         ],
         "responses": {
           "200": {
-            "description": "Plant response",
+            "description": "List of sites",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Plant"
+                    "$ref": "#/components/schemas/Site"
                   }
                 }
               }
             }
-          },
-          "400": {
-            "description": "Unexpected error",
+          }
+        }
+      }
+    },
+    "/sites/{siteId}": {
+      "put": {
+        "summary": "Update a site",
+        "parameters": [
+          {
+            "name": "siteId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Site updated successfully"
+          }
+        }
+      }
+    },
+    "/sites/trigger-build": {
+      "post": {
+        "summary": "Trigger a site build",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Build triggered successfully"
+          }
+        }
+      }
+    },
+    "/sites/build/{buildId}": {
+      "get": {
+        "summary": "Get build status",
+        "parameters": [
+          {
+            "name": "buildId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Build status retrieved successfully"
+          }
+        }
+      }
+    },
+    "/config": {
+      "get": {
+        "summary": "Retrieve all configs",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of configs",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Config"
+                  }
                 }
               }
             }
@@ -60,9 +132,47 @@
         }
       },
       "post": {
-        "description": "Creates a new plant in the store",
-        "requestBody": {
-          "description": "Plant to add to the store",
+        "summary": "Create a new config",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Config created successfully"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "Site": {
+        "type": "object",
+        "properties": {
+          "siteId": { "type": "string" },
+          "siteInfo": { "type": "object" },
+          "status": { "type": "string", "enum": ["pending", "completed"] }
+        }
+      },
+      "Config": {
+        "type": "object",
+        "properties": {
+          "configId": { "type": "string" },
+          "settings": { "type": "object" }
+        }
+      }
+    }
+  }
+}
           "content": {
             "application/json": {
               "schema": {
