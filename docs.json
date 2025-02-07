@@ -28,7 +28,7 @@
         "groups": [
           {
             "name": "API Reference",
-            "openapi": "/path/to/openapi.json",
+            "openapi": "api-reference/openapi.json",
             "url": "api-reference",
             "icon": "square-terminal"
           }
