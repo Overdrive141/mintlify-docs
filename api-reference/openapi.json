@@ -62,6 +62,23 @@
             "bearerAuth": []
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": { "type": "string", "example": "completed" },
+                  "deployedUrl": {
+                    "type": "string",
+                    "example": "https://6749993f.shooterhubreviews-3.pages.dev"
+                  }
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Site updated successfully"
@@ -73,14 +90,97 @@
       "x-group-name": "Site API",
       "post": {
         "summary": "Trigger a site build",
+        "description": "Triggers a build for a site, either for development or production.",
         "security": [
           {
             "bearerAuth": []
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "configId": {
+                    "type": "string",
+                    "example": "677c3f60b3eab9dbdbdd65fe"
+                  },
+                  "domainName": {
+                    "type": "string",
+                    "example": "shooterhubreviews.com"
+                  },
+                  "cloudflareProjectName": {
+                    "type": "string",
+                    "example": "shooterhubreviews"
+                  },
+                  "locale": { "type": "string", "example": "en_CA" },
+                  "title": {
+                    "type": "string",
+                    "example": "Bob the Shooter - Fans (BETA)"
+                  },
+                  "elevatorPitch": {
+                    "type": "string",
+                    "example": "Your best source for shooters, troll your way to victory."
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Dive into the wild world of shooter games with Bob. Stay updated on shooter game rumors, upcoming titles, and community-driven chaos."
+                  },
+                  "production": { "type": "boolean", "example": true }
+                }
+              },
+              "examples": {
+                "Development Build": {
+                  "summary": "Trigger a development build.",
+                  "value": {
+                    "configId": "677c3f60b3eab9dbdbdd65fe",
+                    "cloudflareProjectName": "shooterhubreviews",
+                    "locale": "en_CA",
+                    "title": "Bob the Shooter - Fans (BETA)",
+                    "elevatorPitch": "Your best source for shooters, troll your way to victory.",
+                    "description": "Dive into the wild world of shooter games with Bob. Stay updated on shooter game rumors, upcoming titles, and community-driven chaos.",
+                    "production": false
+                  }
+                },
+                "Production Build": {
+                  "summary": "Trigger a production build.",
+                  "value": {
+                    "configId": "677c3f60b3eab9dbdbdd65fe",
+                    "domainName": "shooterhubreviews.com",
+                    "cloudflareProjectName": "shooterhubreviews",
+                    "locale": "en_CA",
+                    "title": "Bob the Shooter - Fans (BETA)",
+                    "elevatorPitch": "Your best source for shooters, troll your way to victory.",
+                    "description": "Dive into the wild world of shooter games with Bob. Stay updated on shooter game rumors, upcoming titles, and community-driven chaos.",
+                    "production": true
+                  }
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
-            "description": "Build triggered successfully"
+            "description": "Build triggered successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Build initiated successfully"
+                    },
+                    "buildId": { "type": "string", "example": "b123f67890" }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request, missing or invalid parameters."
           }
         }
       }
