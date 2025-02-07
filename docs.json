@@ -27,10 +27,10 @@
         "tab": "API Reference",
         "groups": [
           {
-            "group": "Endpoints",
-            "pages": [
-              "api-reference/openapi"
-            ]
+            "name": "API Reference",
+            "openapi": "/path/to/openapi.json",
+            "url": "api-reference",
+            "icon": "square-terminal"
           }
         ]
       }
