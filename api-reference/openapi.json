@@ -243,9 +243,75 @@
             "bearerAuth": []
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "siteId": {
+                    "type": "string",
+                    "example": "677c3f60b3eab9dbdbdd65fe"
+                  },
+                  "siteInfo": {
+                    "type": "object",
+                    "properties": {
+                      "template": { "type": "string", "example": "studio" },
+                      "domainName": {
+                        "type": "string",
+                        "example": "shooterhubreviews.com"
+                      },
+                      "locale": { "type": "string", "example": "en_CA" },
+                      "title": {
+                        "type": "string",
+                        "example": "Bob the Shooter - Fans (BETA)"
+                      },
+                      "elevatorPitch": {
+                        "type": "string",
+                        "example": "Your best source for shooters, troll your way to victory."
+                      },
+                      "description": {
+                        "type": "string",
+                        "example": "Dive into the wild world of shooter games with Bob. Stay updated on shooter game rumors, upcoming titles, and community-driven chaos."
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "New Config": {
+                  "summary": "Create a new config entry",
+                  "value": {
+                    "siteId": "677c3f60b3eab9dbdbdd65fe",
+                    "siteInfo": {
+                      "template": "studio",
+                      "domainName": "shooterhubreviews.com",
+                      "locale": "en_CA",
+                      "title": "Bob the Shooter - Fans (BETA)",
+                      "elevatorPitch": "Your best source for shooters, troll your way to victory.",
+                      "description": "Dive into the wild world of shooter games with Bob. Stay updated on shooter game rumors, upcoming titles, and community-driven chaos."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "201": {
-            "description": "Config created successfully"
+            "description": "Config created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "configId": { "type": "string", "example": "cf123abcd567" },
+                    "status": { "type": "string", "example": "created" }
+                  }
+                }
+              }
+            }
           }
         }
       }
