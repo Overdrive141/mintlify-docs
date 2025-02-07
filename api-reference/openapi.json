@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "http://foundation-server.up.railway.app/api/v1"
+      "url": "https://foundation-server.up.railway.app/api/v1"
     }
   ],
   "security": [
