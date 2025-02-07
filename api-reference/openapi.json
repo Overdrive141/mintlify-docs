@@ -213,29 +213,6 @@
     },
     "/config": {
       "x-group-name": "Config API",
-      "get": {
-        "summary": "Retrieve all configs",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "List of configs",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Config"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
       "post": {
         "summary": "Create a new config",
         "security": [
@@ -250,48 +227,96 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "siteId": {
-                    "type": "string",
-                    "example": "677c3f60b3eab9dbdbdd65fe"
-                  },
-                  "siteInfo": {
+                  "genre": { "type": "string", "example": "FPS" },
+                  "site_info": {
                     "type": "object",
                     "properties": {
-                      "template": { "type": "string", "example": "studio" },
-                      "domainName": {
-                        "type": "string",
-                        "example": "shooterhubreviews.com"
+                      "keywords": {
+                        "type": "array",
+                        "items": { "type": "string" }
                       },
-                      "locale": { "type": "string", "example": "en_CA" },
-                      "title": {
-                        "type": "string",
-                        "example": "Bob the Shooter - Fans (BETA)"
-                      },
-                      "elevatorPitch": {
-                        "type": "string",
-                        "example": "Your best source for shooters, troll your way to victory."
-                      },
-                      "description": {
-                        "type": "string",
-                        "example": "Dive into the wild world of shooter games with Bob. Stay updated on shooter game rumors, upcoming titles, and community-driven chaos."
+                      "long_tailed_keywords": {
+                        "type": "array",
+                        "items": { "type": "string" }
                       }
                     }
-                  }
-                }
-              },
-              "examples": {
-                "New Config": {
-                  "summary": "Create a new config entry",
-                  "value": {
-                    "siteId": "677c3f60b3eab9dbdbdd65fe",
-                    "siteInfo": {
-                      "template": "studio",
-                      "domainName": "shooterhubreviews.com",
-                      "locale": "en_CA",
-                      "title": "Bob the Shooter - Fans (BETA)",
-                      "elevatorPitch": "Your best source for shooters, troll your way to victory.",
-                      "description": "Dive into the wild world of shooter games with Bob. Stay updated on shooter game rumors, upcoming titles, and community-driven chaos."
+                  },
+                  "audience": {
+                    "type": "object",
+                    "properties": {
+                      "geo": { "type": "array", "items": { "type": "string" } },
+                      "locale": { "type": "string" },
+                      "age_range": { "type": "string" },
+                      "gender": {
+                        "type": "array",
+                        "items": { "type": "string" }
+                      },
+                      "psychology_profile": {
+                        "type": "object",
+                        "properties": {
+                          "killer": { "type": "integer" },
+                          "explorer": { "type": "integer" }
+                        }
+                      },
+                      "device": {
+                        "type": "array",
+                        "items": { "type": "string" }
+                      }
                     }
+                  },
+                  "site_identity": {
+                    "type": "object",
+                    "properties": {
+                      "avatar": {
+                        "type": "object",
+                        "properties": {
+                          "geo": { "type": "string" },
+                          "age": { "type": "integer" },
+                          "gender": { "type": "string" },
+                          "psychology_profile": {
+                            "type": "object",
+                            "properties": {
+                              "killer": { "type": "integer" },
+                              "explorer": { "type": "integer" }
+                            }
+                          },
+                          "genre_likes": {
+                            "type": "array",
+                            "items": { "type": "string" }
+                          },
+                          "mechanics_likes": {
+                            "type": "array",
+                            "items": { "type": "string" }
+                          },
+                          "genre_dislikes": {
+                            "type": "array",
+                            "items": { "type": "string" }
+                          },
+                          "mechanics_dislikes": {
+                            "type": "array",
+                            "items": { "type": "string" }
+                          }
+                        }
+                      },
+                      "tone_of_voice": {
+                        "type": "object",
+                        "properties": {
+                          "language_age": { "type": "string" },
+                          "language_extra_keywords": {
+                            "type": "array",
+                            "items": { "type": "string" }
+                          },
+                          "language_avoid_keywords": {
+                            "type": "array",
+                            "items": { "type": "string" }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "site_subject": {
+                    "type": "string",
+                    "example": "Latest Shooter Games"
                   }
                 }
               }
