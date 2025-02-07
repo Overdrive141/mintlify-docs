@@ -22,6 +22,17 @@
             ]
           }
         ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "Endpoints",
+            "pages": [
+              "api-reference/openapi-spec"
+            ]
+          }
+        ]
       }
     ],
     "global": {}
