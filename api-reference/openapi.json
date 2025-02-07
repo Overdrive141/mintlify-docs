@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://sandbox.mintlify.com/api/v1"
+      "url": "http://foundation-server.up.railway.app/api/v1"
     }
   ],
   "security": [
