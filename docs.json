@@ -25,14 +25,8 @@
       },
       {
         "tab": "API Reference",
-        "groups": [
-          {
-            "name": "API Reference",
-            "openapi": "api-reference/openapi.json",
-            "url": "api-reference",
-            "icon": "square-terminal"
-          }
-        ]
+        "openapi": "api-reference/openapi.json",
+        "url": "api-reference"
       }
     ],
     "global": {}
